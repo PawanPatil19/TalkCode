@@ -13,6 +13,7 @@ with sr.Microphone() as source:
         reached_next = False
         txt = ""
         is_add=True
+        variable_list=[]
 
         f = open("code.txt", "w")
         text = r.recognize_google(audio)
@@ -35,17 +36,12 @@ with sr.Microphone() as source:
                     f.write("string var" + str(cnt_variable) + " = ")
                     cnt_variable += 1
 
-
-            elif x=="add":
-                continue
-
-
-
             elif x == "integer":
                 is_integer = True
                 if (initializer):
                     f.write("int var" + str(cnt_variable) + " = ")
                     cnt_variable += 1
+
 
             elif x == "with":
                 continue
@@ -71,6 +67,7 @@ with sr.Microphone() as source:
 
                 elif (is_integer):
                     txt = x
+                    variable_list.append(int(txt))
 
         f.write("}")
         f.close()
